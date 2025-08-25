@@ -1,0 +1,1906 @@
+<!doctype html>
+<html lang=en-US>
+    <title>arras.io</title>
+    <meta charset=utf-8>
+    <meta name=description content="Level up and gain score by shooting at other players and bosses while keeping yourself alive! Play the game at https://arras.io/.">
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta name=robots content="index, follow">
+    <meta name=theme-color content=#8abc3f>
+    <meta property=og:image content=/favicon/128x128.png>
+    <meta property=og:image:width content=54>
+    <meta property=og:image:height content=54>
+    <link rel=preconnect href=https://fonts.googleapis.com>
+    <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+    <link rel=preconnect href=https://config.playwire.com crossorigin>
+    <link rel=preconnect href=https://cdn.intergi.com crossorigin>
+    <link rel=preconnect href=https://cdn.intergient.com crossorigin>
+    <link rel=preconnect href=https://securepubads.g.doubleclick.net crossorigin>
+    <link rel=preconnect href=https://cdn.playwire.com crossorigin>
+    <link rel=preconnect href=https://cdn.video.playwire.com crossorigin>
+    <link rel=preconnect href=https://z.moatads.com crossorigin>
+    <link rel=apple-touch-icon sizes=60x60 href=/favicon/60x60.png>
+    <link rel=apple-touch-icon sizes=120x120 href=/favicon/120x120.png>
+    <link rel=apple-touch-icon sizes=180x180 href=/favicon/180x180.png>
+    <link rel=icon type=image/png sizes=16x16 href=/favicon/16x16.png>
+    <link rel=icon type=image/png sizes=32x32 href=/favicon/32x32.png>
+    <link rel=icon type=image/png sizes=64x64 href=/favicon/64x64.png>
+    <link rel=icon type=image/png sizes=96x96 href=/favicon/96x96.png>
+    <link rel=icon type=image/png sizes=128x128 href=/favicon/128x128.png>
+    <link rel=icon type=image/png sizes=192x192 href=/favicon/192x192.png>
+    <link rel=icon type=image/png sizes=256x256 href=/favicon/256x256.png>
+    <link rel=icon type=image/png sizes=512x512 href=/favicon/512x512.png>
+    <link rel=icon type=image/png sizes=1024x1024 href=/favicon/1024x1024.png>
+    <link rel=icon type=image/png sizes=2048x2048 href=/favicon/2048x2048.png>
+    <link rel=icon type=image/svg+xml sizes=400x400 href=/favicon/base.svg>
+    <link rel=manifest href=/favicon/manifest.json>
+    <link rel=canonical href=https://arras.io/>
+    <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700">
+    <script async defer src="https://www.googletagmanager.com/gtag/js?id=UA-120544149-1"></script>
+    <style>
+        html,body,#canvas,canvas {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            user-select: none
+        }
+
+        canvas {
+            background: #000;
+            pointer-events: none
+        }
+    </style>
+    <body>
+        <script>
+            (async () => {
+                if (!window.WebAssembly) {
+                    let e = document.createElement("div");
+                    e.textContent = "WebAssembly is not supported on your browser! Please upgrade your browser to the latest version.",
+                    e.style.position = "absolute",
+                    e.style.top = "0",
+                    e.style.width = "100%",
+                    e.style.padding = "20px",
+                    e.style.background = "red",
+                    e.style.color = "white",
+                    e.style.font = "bold 20px sans-serif",
+                    document.body.appendChild(e);
+                    return
+                }
+                let e = []
+                  , t = (t, r) => {
+                    e[t] = r
+                }
+                  , r = null
+                  , a = () => ((null == r || 0 === r.byteLength) && (r = window.u8 = new Uint8Array(f.e.buffer)), window.i64 = new BigInt64Array(f.e.buffer),
+                r)
+                  , n = null
+                  , o = () => ((null == n || 0 === n.byteLength) && (n = window.i32 = new Int32Array(f.e.buffer)),
+                n)
+                  , s = null
+                  , i = () => ((null == s || 0 === s.byteLength) && (s = window.f64 = new Float64Array(f.e.buffer)),
+                s)
+                  , d = new TextEncoder("utf-8")
+                  , l = new TextDecoder("utf-8",{
+                    ignoreBOM: !0
+                });
+                l.decode();
+                let c = /^[\x00-\x7f]*$/
+                  , u = (e, t) => {
+                    if (c.test(t)) {
+                        let r = f.d(t.length, 1)
+                          , n = a();
+                        for (let e = 0; e < t.length; e++)
+                            n[r + e] = t.charCodeAt(e);
+                        o().set([r, t.length], e >> 2)
+                    } else
+                        y(e, d.encode(t))
+                }
+                  , p = (e, t) => {
+                    null != t && u(e, t)
+                }
+                  , y = (e, t) => {
+                    let r = f.d(t.length, 1);
+                    a().set(t, r),
+                    o().set([r, t.length], e >> 2)
+                }
+                  , h = (e, t) => {
+                    let r = f.d(t.length << 3, 8);
+                    i().set(t, r >> 3),
+                    o().set([r, t.length], e >> 2)
+                }
+                  , m = [[ (e, r, n) => {
+                    r = l.decode(a().subarray(r, r + n)),
+                    t(e, ( () => {
+                        let e = document.createElement("div");
+                        return e.id = r,
+                        document.body.appendChild(e),
+                        e
+                    }
+                    )())
+                }
+                , (t, r) => {
+                    y(t, (r = e[r]).shift())
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.strokeStyle = `rgb(${r >> 16},${r >> 8 & 255},${255 & r})`
+                }
+                , (t, r, a) => {
+                    (t = e[t]).moveTo(r, a)
+                }
+                , () => {
+                    let e = document.createElement("script");
+                    e.defer = !0,
+                    e.src = "https://static.cloudflareinsights.com/beacon.min.js",
+                    e.setAttribute("data-cf-beacon", JSON.stringify({
+                        token: "arras.io" === location.hostname.slice(-8) ? "ff5561cea47c47eaafe62003a2bb80fe" : "arrax.io" === location.hostname.slice(-8) ? "7ce137179299421288a5a93c26f71e2c" : "arras.netlify.app" === location.hostname.slice(-17) ? "73db2851ba12432c968cae9c6b385f3a" : "arras.cx" === location.hostname.slice(-8) ? "a5ebfa0ea9364b2ca5cddf829c28095e" : "1a3464390f784a2a800f401f1bfa6a30"
+                    })),
+                    document.body.appendChild(e)
+                }
+                , t => (t = e[t]).readyState, () => "boolean" == typeof window.crossOriginIsolated, (t, r, a, n, o, s) => {
+                    /*t = e[t],
+                    r = e[r],
+                    t.drawImage(r, a, n, o, s)*/
+                }
+                , t => {
+                    (t = e[t]).clip()
+                }
+                , (e, r, n) => {
+                    r = l.decode(a().subarray(r, r + n)),
+                    t(e, ( () => {
+                        let e = new Image;
+                        return e.src = r,
+                        e
+                    }
+                    )())
+                }
+                , t => !!((t = e[t]).captureStream && window.MediaRecorder && MediaRecorder.isTypeSupported("video/webm")), (t, r, a, n) => {
+                    t = e[t],
+                    r >>>= 0,
+                    a >>>= 0,
+                    t.texParameteri(r, a, n)
+                }
+                , e => {
+                    t(e, e => {
+                        (async () => navigator.clipboard.write([new ClipboardItem({
+                            [e.type]: e
+                        })]))().catch(e => alert("Failed to copy!"))
+                    }
+                    )
+                }
+                , t => {
+                    (t = e[t]).id = "canvas",
+                    document.body.appendChild(t)
+                }
+                , (t, r) => {
+                    (t = e[t]).lineWidth = r
+                }
+                , (e, t, r, n) => {
+                    // console.log(e = l.decode(a().subarray(e, e + t)), r = l.decode(a().subarray(r, r + n)))
+                }
+                , e => {
+                    t(e, ( () => {
+                        let e = [];
+                        try {
+                            navigator.keyboard.getLayoutMap().then(t => {
+                                e.push(Array.from(t).join("\n"))
+                            }
+                            ).catch(t => {
+                                e.push("")
+                            }
+                            )
+                        } catch (t) {
+                            e.push("")
+                        }
+                        return e
+                    }
+                    )())
+                }
+                , (t, r, a) => {
+                    t = e[t],
+                    r >>>= 0,
+                    a = e[a],
+                    t.bindTexture(r, a)
+                }
+                , () => parent !== top, (t, r, n, o, s) => {
+                    t = e[t],
+                    r >>>= 0,
+                    n = a().subarray(n, n + o),
+                    s >>>= 0,
+                    t.bufferData(r, n, s)
+                }
+                , (t, r, a, n, o) => {
+                    (t = e[t]).viewport(r, a, n, o)
+                }
+                , (t, r, a) => {
+                    t = e[t],
+                    r = e[r],
+                    a = e[a],
+                    t.attachShader(r, a)
+                }
+                , (t, r, n, o, s) => {
+                    (t = e[t])(new Blob([r = a().subarray(r, r + n)],{
+                        type: o = l.decode(a().subarray(o, o + s))
+                    }))
+                }
+                , t => 0 === (t = e[t]).length ? 0 : t[0].status ? 1 : t[0].signature ? 2 : 3, (t, r, a) => {
+                    u(t, (r = e[r])[a].name)
+                }
+                , (t, r, n, o) => (t = e[t],
+                r = e[r],
+                n = l.decode(a().subarray(n, n + o)),
+                t.getAttribLocation(r, n)), (t, r, a, n, o) => {
+                    t = e[t],
+                    r = e[r],
+                    t.uniform3f(r, a, n, o)
+                }
+                , t => "boolean" == typeof (t = e[t]), t => (t = e[t]).shift() ?? -1, e => {
+                    t(e, window)
+                }
+                , e => {
+                    u(e, ( () => {
+                        let e;
+                        try {
+                            e = localStorage.getItem("arras.io")
+                        } catch (e) {}
+                        return e || ""
+                    }
+                    )())
+                }
+                , e => {
+                    u(e, location.hash)
+                }
+                , (t, r, n, o, s, i) => {
+                    t = e[t],
+                    r = e[r],
+                    n = l.decode(a().subarray(n, n + o)),
+                    s = l.decode(a().subarray(s, s + i)),
+                    t(new Blob([r],{
+                        type: n
+                    }), s)
+                }
+                , (t, r, n, o) => {
+                    // t = l.decode(a().subarray(t, t + r)),
+                    // n = e[n],
+                    // o >>>= 0,
+                    // fetch(t).then(e => e.arrayBuffer()).then(e => e.byteLength).catch( () => -1).then(e => n.push(o, e))
+                }
+                , (t, r, a) => {
+                    t = e[t],
+                    r = e[r],
+                    t.uniform1i(r, a)
+                }
+                , (e, t) => {
+                    e = l.decode(a().subarray(e, e + t));
+                    let r = document.createElement("canvas");
+                    try {
+                        return r.getContext(e, {
+                            failIfMajorPerformanceCaveat: !0
+                        }) ? 3 : r.getContext(e) ? 2 : 1
+                    } catch (e) {}
+                    return 0
+                }
+                , (t, r) => {
+                    r = e[r],
+                    h(t, ( () => {
+                        r.style.position = "absolute",
+                        r.style.display = "inline-block",
+                        r.style.width = "auto",
+                        r.style.height = "auto",
+                        r.style.overflow = "hidden",
+                        r.style.transformOrigin = "top left",
+                        r.style.transform = "";
+                        let e = r.getBoundingClientRect();
+                        return [e.width, e.height]
+                    }
+                    )())
+                }
+                , t => {
+                    (t = e[t]).focus()
+                }
+                , () => "ontouchstart"in document.body && /android|mobi/i.test(navigator.userAgent), (t, r) => {
+                    u(t, r = e[r])
+                }
+                , t => (t = e[t]).shift(), t => "number" == typeof (t = e[t]), (t, r) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.clear(r)
+                }
+                , () => !document.createElement("canvas").getContext("webgl", {
+                    failIfMajorPerformanceCaveat: !0
+                }), (t, r, n, o, s) => {
+                    t = e[t],
+                    r = l.decode(a().subarray(r, r + n)),
+                    t.fillText(r, o, s)
+                }
+                , (r, a, n) => {
+                    a = e[a],
+                    n >>>= 0,
+                    t(r, a.getParameter(n))
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.disable(r)
+                }
+                , (t, r) => {
+                    (t = e[t]).font = `${r}px Ubuntu`
+                }
+                , t => {
+                    let r = (t = e[t])[0];
+                    return t[0] = !1,
+                    r
+                }
+                , (t, r, n) => {
+                    // $0.49
+                    // console.log(t, r, n);
+                    t = e[t];
+                    r = a().subarray(r, r + n);
+                    1 === t.readyState && t.send(r);
+                    window.new_packet_send = true;
+                    // window.packet_send = r;
+                    // console.log("send", r);
+                    // console.log("sent a packet");
+                }
+                , (t, r) => (t = e[t])[r].clients, (t, r, a, n, o) => {
+                    (t = e[t]).strokeRect(r, a, n, o)
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r = e[r],
+                    t.compileShader(r)
+                }
+                , () => performance.now(), t => {
+                    (t = e[t]).remove()
+                }
+                , (t, r, n, o) => {
+                    t = e[t],
+                    r = e[r],
+                    n = l.decode(a().subarray(n, n + o)),
+                    t.shaderSource(r, n)
+                }
+                , () => Date.now(), t => t = e[t], () => {
+                    try {
+                        document.body.requestFullscreen()
+                    } catch (e) {}
+                }
+                , (t, r, n) => {
+                    t = l.decode(a().subarray(t, t + r)),
+                    n = e[n];
+                    // Fix for current server fetch
+                    t = t.replace(".uvwx.xyz:2222", "-c.uvwx.xyz:8443/2222");
+                    if (!t.includes("signature")) {
+                        fetch(t).then(e => e.json()).then(e => {
+                        n.push(e),
+                        g()})
+                    }
+                }
+                , (t, r) => {
+                    (t = e[t]).globalAlpha = r
+                }
+                , t => (t = e[t]).complete, t => (t = e[t]).shift(), () => navigator.hardwareConcurrency || -1, (e, t) => {
+                    e = l.decode(a().subarray(e, e + t)),
+                    location.hash = window.identifier = `#${e}`
+                }
+                , () => crypto.getRandomValues(new Uint32Array(1))[0], (t, r) => {
+                    u(t, (r = e[r]).shift() ?? "")
+                }
+                , (e, t) => {
+                    e = l.decode(a().subarray(e, e + t)),
+                    location.hash = window.identifier = e;
+                }
+                , (t, r, a) => {
+                    (t = e[t]).width = r,
+                    t.height = a
+                }
+                , () => !!WebAssembly.instantiateStreaming, () => {
+                    try {
+                        // location.reload()
+                    } catch (e) {}
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r = e[r],
+                    t.linkProgram(r)
+                }
+                , (t, r, a, n) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.drawArrays(r, a, n)
+                }
+                , (t, r) => {
+                    u(t, (r = e[r]).shift().signature)
+                }
+                , t => (t = e[t]).shift().clients, (r, a) => {
+                    t(r, Object.values((a = e[a]).shift().status))
+                }
+                , (r, n, o, s) => {
+                    n = e[n],
+                    o = l.decode(a().subarray(o, o + s)),
+                    t(r, ( () => {
+                        try {
+                            return n[o]
+                        } catch (e) {
+                            return n
+                        }
+                    }
+                    )())
+                }
+                , e => {
+                    u(e, ( () => {
+                        let e = document.createElement("canvas").getContext("webgl");
+                        if (!e)
+                            return "";
+                        let t = [e.RENDERER, e.VENDOR]
+                          , r = e.getExtension("WEBGL_debug_renderer_info");
+                        return null != r && t.push(r.UNMASKED_RENDERER_WEBGL, r.UNMASKED_VENDOR_WEBGL),
+                        t.map(t => e.getParameter(t)).join("\n")
+                    }
+                    )())
+                }
+                , e => {
+                    u(e, navigator.userAgent || "")
+                }
+                , () => !!navigator.serviceWorker, (e, t) => {
+                    e = a().subarray(e, e + t);
+                    try {
+                        return new WebAssembly.Instance(new WebAssembly.Module(e)).exports.b(BigInt(0)) === BigInt(0)
+                    } catch (e) {}
+                    return !1
+                }
+                , e => {
+                    t(e, e => (e.preventDefault(),
+                    e.returnValue = "",
+                    ""))
+                }
+                , () => !!navigator.gpu, (t, r, n) => {
+                    t = e[t],
+                    r = l.decode(a().subarray(r, r + n)),
+                    t.value = r
+                }
+                , e => {
+                    t(e, document.createElement("canvas"))
+                }
+                , e => {
+                    t(e, ( () => {
+                        let e = [!1, !1]
+                          , t = () => {
+                            e[0] = !0,
+                            g(),
+                            e[1] || requestAnimationFrame(t)
+                        }
+                        ;
+                        return requestAnimationFrame(t),
+                        e
+                    }
+                    )())
+                }
+                , e => {
+                    u(e, location.hostname)
+                }
+                , t => (t = e[t]).shift() || 0, t => {
+                    (t = e[t]).addEventListener("focus", () => t.select())
+                }
+                , t => {
+                    (t = e[t]).stroke()
+                }
+                , (t, r, a, n, o, s, i, d, l) => {
+                    r >>>= 0,
+                    a = e[a],
+                    d >>>= 0,
+                    l >>>= 0,
+                    y(t, ( () => {
+                        let e = new Uint8Array(r);
+                        return a.readPixels(n, o, s, i, d, l, e),
+                        e
+                    }
+                    )())
+                }
+                , t => {
+                    (t = e[t]).lineJoin = "round",
+                    t.lineCap = "round",
+                    t.textAlign = "left",
+                    t.textBaseline = "middle"
+                }
+                , () => {
+                    let e = !1;
+                    window.addEventListener("error", t => {
+                        if (e)
+                            return;
+                        e = !0;
+                        let {message: r, filename: a, lineno: n, colno: o, error: s} = t;
+                        s && (s = s.toString()),
+                        (null != s || 0 != n || 0 != o) && prompt("The game may have crashed, refresh the page to recover from error.\n\nError information:", JSON.stringify({
+                            message: r,
+                            filename: a,
+                            lineno: n,
+                            colno: o,
+                            error: s
+                        }))
+                    }
+                    )
+                }
+                , (t, r, a) => {
+                    t = e[t],
+                    r >>>= 0,
+                    a >>>= 0,
+                    t.blendFunc(r, a)
+                }
+                , t => {
+                    (t = e[t]).lineCap = "round"
+                }
+                , t => (t = e[t]).pop(), (t, r) => {
+                    (t = e[t]).font = `bold ${r}px Ubuntu`
+                }
+                , t => {
+                    (t = e[t]).fill()
+                }
+                , (t, r, a, n) => {
+                    t = e[t],
+                    r = e[r],
+                    t.drawImage(r, a, n)
+                }
+                , (t, r, a, n, o) => {
+                    t = e[t],
+                    r >>>= 0,
+                    n >>>= 0,
+                    t.drawElements(r, a, n, o)
+                }
+                , (t, r, a) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.strokeStyle = `rgba(${r >> 16},${r >> 8 & 255},${255 & r},${a})`
+                }
+                , t => ((t = e[t]).videoRecorder || (t.videoRecorder = new MediaRecorder(t.captureStream(30),{
+                    mimeType: MediaRecorder.isTypeSupported("video/webm;codecs=vp8") ? "video/webm;codecs=vp8" : "video/webm",
+                    videoBitsPerSecond: 2097152,
+                    audioBitsPerSecond: 0
+                })),
+                "inactive" === t.videoRecorder.state) ? (t.videoRecorder.start(),
+                !1) : (t.videoRecorder.stop(),
+                !0), (t, r, a) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.pixelStorei(r, a)
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.depthFunc(r)
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.enableVertexAttribArray(r)
+                }
+                , t => {
+                    (t = e[t]).style.clipPath = "none"
+                }
+                , (t, r, a) => {
+                    (t = e[t]).translate(r, a)
+                }
+                , (t, r) => {
+                    u(t, (r = e[r])[0].ip)
+                }
+                , () => !!window.RTCDataChannel, t => {
+                    t = e[t],
+                    window.addEventListener("beforeunload", t)
+                }
+                , (r, a) => {
+                    a = e[a],
+                    t(r, ( () => {
+                        let e = atob(a.toDataURL().split(",")[1])
+                          , t = new Uint8Array(e.length);
+                        for (let r = 0; r < e.length; r++)
+                            t[r] = e.charCodeAt(r);
+                        return t
+                    }
+                    )())
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.activeTexture(r)
+                }
+                , (r, n, o, s, i) => {
+                    n = e[n],
+                    o = e[o],
+                    s = l.decode(a().subarray(s, s + i)),
+                    t(r, n.getUniformLocation(o, s))
+                }
+                , t => {
+                    (t = e[t]).lineCap = "butt"
+                }
+                , t => "string" == typeof (t = e[t]), (e, t) => {
+                    open(e = l.decode(a().subarray(e, e + t)), "_blank", "noopener")
+                }
+                , (e, t) => (e = a().subarray(e, e + t),
+                WebAssembly.validate(e)), (t, r) => {
+                    t = e[t],
+                    r = e[r],
+                    t.replaceWith(r)
+                }
+                , (t, r, a, n, o, s) => {
+                    (t = e[t]).style.left = `${r}px`,
+                    t.style.top = `${a}px`,
+                    t.style.width = `${n}px`,
+                    t.style.height = `${o}px`,
+                    t.style.transform = `scale(${s}, ${s})`
+                }
+                , () => {
+                    let e = window.ramp = window.ramp || {};
+                    e.que = e.que || [],
+                    e.passiveMode = !0,
+                    window._pwGA4PageviewId = Date.now().toString();
+                    let t = window.dataLayer = window.dataLayer || []
+                      , r = window.gtag = window.gtag || function() {
+                        t.push(arguments)
+                    }
+                    ;
+                    r("js", new Date),
+                    r("config", "UA-120544149-1"),
+                    r("event", "ramp_js", {
+                        send_to: "UA-120544149-1",
+                        pageview_id: window._pwGA4PageviewId
+                    })
+                }
+                , t => {
+                    e[t >>>= 0] = null
+                }
+                , (t, r) => (t = e[t])[r].hidden, e => {
+                    t(e, null)
+                }
+                , t => (t = e[t],
+                document.activeElement === t), (r, a) => {
+                    a = e[a],
+                    t(r, ( () => {
+                        let e = [];
+                        window.mouse_move = function(angle) {
+                            (e.push(2, window.innerWidth / 2 + Math.cos(angle) * 200, window.innerHeight / 2 + Math.sin(angle) * 200),
+                            g());
+                        }
+                        return a.addEventListener("mousedown", t => {
+                            (e.push(1, t.clientX, t.clientY, t.button),
+                            g())
+                        }
+                        ),
+                        a.addEventListener("mousemove", t => {
+                            (e.push(2, t.clientX, t.clientY),
+                            g())
+                        }
+                        ),
+                        a.addEventListener("mouseup", t => {
+                            (e.push(3, t.clientX, t.clientY, t.button),
+                            g())
+                        }
+                        ),
+                        a.addEventListener("wheel", t => {
+                            (t.preventDefault(),
+                            e.push(4, t.clientX, t.clientY, t.deltaY * (1 === t.deltaMode ? 40 : 2 === t.deltaMode ? 320 : 1)),
+                            g())
+                        }
+                        ),
+                        a.addEventListener("touchstart", t => {
+                            if (t.isTrusted)
+                                for (let r of (t.preventDefault(),
+                                t.changedTouches))
+                                    e.push(5, r.clientX, r.clientY, r.identifier),
+                                    g()
+                        }
+                        , {
+                            passive: !1
+                        }),
+                        a.addEventListener("touchmove", t => {
+                            if (t.isTrusted)
+                                for (let r of (t.preventDefault(),
+                                t.changedTouches))
+                                    e.push(6, r.clientX, r.clientY, r.identifier),
+                                    g()
+                        }
+                        , {
+                            passive: !1
+                        }),
+                        a.addEventListener("touchend", t => {
+                            if (t.isTrusted)
+                                for (let r of (t.preventDefault(),
+                                t.changedTouches))
+                                    e.push(7, r.clientX, r.clientY, r.identifier),
+                                    g()
+                        }
+                        ),
+                        a.addEventListener("touchcancel", t => {
+                            if (t.isTrusted)
+                                for (let r of t.changedTouches)
+                                    e.push(8, r.clientX, r.clientY, r.identifier),
+                                    g()
+                        }
+                        ),
+                        e
+                    }
+                    )())
+                }
+                , (t, r) => {
+                    (t = e[t]).font = `${r}px Trebuchet MS`
+                }
+                , (t, r) => (t = e[t])[r].uptime, () => new Date(new Date().getFullYear(),0,1).getTimezoneOffset(), e => {
+                    t(e, [])
+                }
+                , (t, r, a, n, o, s, i) => {
+                    t = e[t],
+                    r >>>= 0,
+                    n >>>= 0,
+                    o = o > 0,
+                    t.vertexAttribPointer(r, a, n, o, s, i)
+                }
+                , (t, r) => {
+                    u(t, (r = e[r]).protocol)
+                }
+                , (t, r, a, n, o) => {
+                    (t = e[t]).scissor(r, a, n, o)
+                }
+                , () => window.innerWidth, t => (t = e[t]).length, () => window.devicePixelRatio, (t, r) => {
+                    t = e[t],
+                    r = e[r],
+                    t.appendChild(r)
+                }
+                , (t, r, a) => {
+                    u(t, (r = e[r])[a].host)
+                }
+                , (r, a, n) => {
+                    a = e[a],
+                    n = n > 0,
+                    t(r, a.getContext("2d", {
+                        alpha: n
+                    }))
+                }
+                , t => !(t = e[t]), (r, a) => {
+                    t(r, (a = e[a]).createTexture())
+                }
+                , (t, r, a, n, o) => {
+                    t = e[t],
+                    r >>>= 0,
+                    a >>>= 0,
+                    n >>>= 0,
+                    o >>>= 0,
+                    t.blendFuncSeparate(r, a, n, o)
+                }
+                , (t, r, n, o, s) => {
+                    t = e[t],
+                    r = l.decode(a().subarray(r, r + n)),
+                    t.strokeText(r, o, s)
+                }
+                , (t, r, a, n) => {
+                    t = e[t],
+                    r = e[r],
+                    t.uniform2f(r, a, n)
+                }
+                , (r, a) => {
+                    a = e[a],
+                    t(r, new Promise(e => a.toBlob(e)))
+                }
+                , (t, r, n, o) => {
+                    t = e[t],
+                    r = e[r],
+                    n = l.decode(a().subarray(n, n + o)),
+                    t.then(e => r(e, n))
+                }
+                , () => {
+                    let e = () => window.arrasAdDone = !0
+                      , t = document.createElement("script");
+                    t.async = !0,
+                    t.src = "https://cdn.intergient.com/1024850/73985/ramp.js",
+                    t.onload = () => {
+                        ramp.que.push(e),
+                        setTimeout(e, 2e4)
+                    }
+                    ,
+                    t.onerror = e,
+                    document.body.appendChild(t)
+                }
+                , (r, a) => {
+                    t(r, (a = e[a])[1])
+                }
+                , (t, r, n, o) => {
+                    (t = e[t])(new Blob([r = e[r]],{
+                        type: n = l.decode(a().subarray(n, n + o))
+                    }))
+                }
+                , e => {
+                    t(e, (e, t) => {
+                        let r = URL.createObjectURL(e)
+                          , a = document.createElement("a");
+                        a.style.display = "none",
+                        a.setAttribute("download", t),
+                        a.setAttribute("href", r),
+                        document.body.appendChild(a),
+                        a.click(),
+                        a.remove(),
+                        URL.revokeObjectURL(r)
+                    }
+                    )
+                }
+                , t => (t = e[t])[0].timestamp, (r, a, n) => {
+                    a = e[a],
+                    n >>>= 0,
+                    t(r, a.createShader(n))
+                }
+                , e => {
+                    u(e, ( () => {
+                        let e = Error.stackTraceLimit;
+                        "number" == typeof e && (Error.stackTraceLimit = 1e3);
+                        let t = Error().stack;
+                        return "number" == typeof e && (Error.stackTraceLimit = e),
+                        t || ""
+                    }
+                    )())
+                }
+                , () => {
+                    let e = document.activeElement;
+                    null != e && e.blur()
+                }
+                , (t, r) => {
+                    u(t, (r = e[r]).shift())
+                }
+                , e => {
+                    t(e, ( () => {
+                        let e = [];
+                        return fetch("./wasm/CHANGELOG.md").then(e => e.text()).catch( () => "").then(t => e.push(t)),
+                        e
+                    }
+                    )())
+                }
+                , e => {
+                    t(e, ( () => {
+                        let e = [];
+                        return Promise.all([document.fonts.load("bold 16px Ubuntu"), document.fonts.load("16px Ubuntu")]).then( () => e.push(!0)),
+                        e
+                    }
+                    )())
+                }
+                , (t, r) => {
+                    y(t, r = e[r])
+                }
+                , (t, r, a) => {
+                    t = e[t],
+                    r >>>= 0,
+                    a = e[a],
+                    t.bindBuffer(r, a)
+                }
+                , (t, r) => {
+                    u(t, (r = e[r]).lastValue)
+                }
+                , (t, r, a, n, o, s) => {
+                    (t = e[t]).arc(r, a, n, o, s)
+                }
+                , (r, a, n) => {
+                    a = e[a],
+                    n = n > 0,
+                    t(r, a.getContext("webgl", {
+                        antialias: n,
+                        premultipliedAlpha: !0,
+                        failIfMajorPerformanceCaveat: !0
+                    }))
+                }
+                , (t, r, n) => {
+                    t = e[t],
+                    r = l.decode(a().subarray(r, r + n)),
+                    t.lastValue = r
+                }
+                , (t, r, a) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.fillStyle = `rgba(${r >> 16},${r >> 8 & 255},${255 & r},${a})`
+                }
+                , t => {
+                    (t = e[t]).style.textAlign = "center"
+                }
+                , t => {
+                    (t = e[t]).save()
+                }
+                , (t, r) => {
+                    r = e[r],
+                    u(t, ( () => {
+                        try {
+                            return `${r}`
+                        } catch (e) {
+                            return ""
+                        }
+                    }
+                    )())
+                }
+                , t => {
+                    (t = e[t]).closePath()
+                }
+                , t => (t = e[t]).isContextLost(), (t, r, a, n, o, s, i, d, l, c, u) => {
+                    t = e[t],
+                    i >>>= 0,
+                    c = c > 0,
+                    u = u > 0,
+                    t.style.position = "absolute",
+                    t.style.left = `${r}px`,
+                    t.style.top = `${a}px`,
+                    t.style.width = `${n}px`,
+                    t.style.height = `${o}px`,
+                    t.style.font = `bold ${s}px/${o}px Ubuntu`,
+                    t.style.border = "none",
+                    t.style.outline = "none",
+                    t.style.padding = "0",
+                    t.style.margin = "0",
+                    t.style.backgroundColor = "transparent",
+                    t.style.setProperty("color", `rgba(${i >> 16},${i >> 8 & 255},${255 & i},${d})`, "important"),
+                    t.maxLength = l,
+                    t.type = c ? "password" : "text",
+                    t.readOnly = u
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.enable(r)
+                }
+                , (t, r, a, n, o, s, i, d, l, c) => {
+                    t = e[t],
+                    r = e[r],
+                    t.drawImage(r, a, n, o, s, i, d, l, c)
+                }
+                , t => {
+                    (t = e[t]).restore()
+                }
+                , t => {
+                    (t = e[t]).beginPath()
+                }
+                , (t, r, n) => {
+                    t = e[t],
+                    r = l.decode(a().subarray(r, r + n)),
+                    t.style.cursor = r
+                }
+                , (t, r) => {
+                    r = e[r],
+                    h(t, ( () => {
+                        let e = r.getBoundingClientRect();
+                        return [e.top, e.right, e.bottom, e.left]
+                    }
+                    )())
+                }
+                , e => {
+                    t(e, document.createElement("div"))
+                }
+                , (e, t, r) => {
+                    t = l.decode(a().subarray(t, t + r)),
+                    u(e, ( () => {
+                        let e = ""
+                          , r = document.createElement("span");
+                        for (let a of (r.style.visibility = "hidden",
+                        r.style.font = "initial",
+                        r.style.fontSize = "1920px",
+                        document.body.appendChild(r),
+                        ["initial", "sans-serif", "serif", "monospace", "cursive", "fantasy"]))
+                            for (let n of (r.style.fontFamily = a,
+                            t))
+                                r.textContent = n,
+                                e += `${r.offsetWidth} ${r.offsetHeight}
+`;
+                        return r.remove(),
+                        e.slice(0, -1)
+                    }
+                    )())
+                }
+                , (e, t) => {
+                    e = l.decode(a().subarray(e, e + t));
+                    try {
+                        localStorage.setItem("arras.io", e)
+                    } catch (e) {}
+                }
+                , e => {
+                    t(e, ( () => {
+                        let e = document.createElement("input");
+                        e.spellcheck = !1,
+                        e.autocomplete = "off",
+                        e.tabIndex = -1,
+                        e.lastValue = e.value;
+                        return e;
+                    }
+                    )())
+                }
+                , (t, r) => (t = e[t])[r].mspt, (t, r) => {
+                    t = e[t],
+                    r >>>= 0,
+                    t.fillStyle = `rgb(${r >> 16},${r >> 8 & 255},${255 & r})`
+                }
+                , (r, a, n, o) => {
+                    a = e[a],
+                    n = e[n],
+                    o >>>= 0,
+                    t(r, a.getProgramParameter(n, o))
+                }
+                , (t, r, a, n, o) => {
+                    (t = e[t]).rect(r, a, n, o)
+                }
+                , (r, a) => {
+                    a = e[a],
+                    t(r, new Promise(e => {
+                        let t = r => {
+                            e(r.data),
+                            a.videoRecorder.removeEventListener("dataavailable", t)
+                        }
+                        ;
+                        a.videoRecorder.addEventListener("dataavailable", t)
+                    }
+                    ))
+                }
+                , (t, r, n) => (t = e[t],
+                r = l.decode(a().subarray(r, r + n)),
+                t.measureText(r).width), (t, r, n, o, s, i, d) => {
+                    t = e[t],
+                    r = a().subarray(r, r + n),
+                    o = l.decode(a().subarray(o, o + s)),
+                    i = l.decode(a().subarray(i, i + d)),
+                    t(new Blob([r],{
+                        type: o
+                    }), i)
+                }
+                , (t, r, a, n, o) => {
+                    (t = e[t]).style.clipPath = `xywh(${r}px ${a}px ${n}px ${o}px)`
+                }
+                , (t, r, a, n, o, s, i) => {
+                    t = e[t],
+                    r >>>= 0,
+                    n >>>= 0,
+                    o >>>= 0,
+                    s >>>= 0,
+                    i = e[i],
+                    t.texImage2D(r, a, n, o, s, i)
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r = e[r],
+                    t.useProgram(r)
+                }
+                , (t, r) => {
+                    t = e[t],
+                    r = e[r],
+                    t.then(e => r(e))
+                }
+                , t => (t = e[t]).shift() || 0, (r, a) => {
+                    a = e[a],
+                    t(r, ( () => {
+                        let e = [];
+                        return a.addEventListener("open", () => {
+                            window.room_data = new room_parser();
+                            window.broadcast_data = new broadcast_parser();
+                            window.update_data = new update_parser();
+                            window.mockup_data = new mockup_parser();
+                            window.player_tab_data = new player_tab_parser();
+                            e.push(1);
+                            g();
+                        }
+                        ),
+                        a.addEventListener("message", t => {
+                            window.encoded_packet = new Uint8Array(t.data);
+                            window.new_packet_message = true;
+                            e.push(2, window.encoded_packet),
+                            g()
+                        }
+                        ),
+                        a.addEventListener("close", t => {
+                            e.push(3, t.wasClean, t.code, t.reason),
+                            g();   
+                        }
+                        ),
+                        a.addEventListener("error", () => {
+                            e.push(4),
+                            g()
+                        }
+                        ),
+                        e
+                    }
+                    )())
+                }
+                , (e, t) => {
+                    /*fetch("https://analytics-server.arras.cx:2002/data", {
+                        method: "POST",
+                        mode: "cors",
+                        cache: "no-cache",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: e = l.decode(a().subarray(e, e + t))
+                    }).then(e => e.json()).catch( () => {}
+                    )*/
+                }
+                , (t, r) => {
+                    u(t, (r = e[r]).value)
+                }
+                , () => null != document.fullscreenElement, () => window.innerHeight, (t, r, a, n, o) => {
+                    t = e[t];
+                    let g = t.globalAlpha;
+                    t.fillRect(r, a, n, o);
+                    t.globalAlpha = g;
+                }
+                , t => t = e[t], t => {
+                    (t = e[t]).lineJoin = "round"
+                }
+                , t => (t = e[t])[0], t => {
+                    (t = e[t]).lineJoin = "miter"
+                }
+                , (e, t) => {
+                    e = l.decode(a().subarray(e, e + t)),
+                    (async () => navigator.clipboard.writeText(e))().catch( () => prompt("Copy:", e))
+                }
+                , e => {
+                    u(e, document.referrer)
+                }
+                , t => {
+                    (t = e[t])[1] = !0
+                }
+                , t => {
+                    t = e[t]
+                }
+                , e => {
+                    t(e, ( () => {
+                        let e = [!1, !1]
+                          , t = new MessageChannel;
+                        return t.port1.addEventListener("message", () => {
+                            e[0] = !0,
+                            g(),
+                            e[1] || (document.hidden ? requestAnimationFrame( () => t.port2.postMessage(null)) : t.port2.postMessage(null))
+                        }
+                        ),
+                        t.port1.start(),
+                        t.port2.postMessage(null),
+                        e
+                    }
+                    )())
+                }
+                , (t, r) => (t = e[t])[r].online, () => {
+                    document.addEventListener("contextmenu", e => {
+                        "A" !== e.target.tagName && "INPUT" !== e.target.tagName && e.preventDefault()
+                    }
+                    )
+                }
+                , e => {
+                    t(e, ( () => {
+                        let e = []
+                          , t = () => true;
+                        window.press = function(key, keyCode) {
+                            e.push(2, key, keyCode);
+                        };
+                        window.up = function(key, keyCode) {
+                            e.push(1, key, keyCode);
+                        };
+                        window.press_dir = function(dir) {
+                            if (!window.active_dirs[dir]) {
+                                e.push(2, window.move_dirs[dir][0], window.move_dirs[dir][1]);
+                                window.active_dirs[dir] = true;
+                                g();
+                            }
+                        };
+                        window.up_dir = function (dir) {
+                            if (window.active_dirs[dir]) {
+                                e.push(1, window.move_dirs[dir][0], window.move_dirs[dir][1]);
+                                window.active_dirs[dir] = false;
+                                g();
+                            }
+                        };
+                        return window.addEventListener("keydown", r => {
+                            r.ctrlKey || r.altKey || r.metaKey || t() || /^F([56]|\d{2,})$/.test(r.key) || r.preventDefault();
+                            let a = r.ctrlKey | r.altKey << 1 | r.shiftKey << 2 | r.metaKey << 3;
+                            e.push(2 | r.repeat | a << 2, r.key, r.code),
+                            g()
+                        }
+                        ),
+                        window.addEventListener("keyup", r => {
+                            r.ctrlKey || r.altKey || r.metaKey || t() || /^F([56]|\d{2,})$/.test(r.key) || r.preventDefault();
+                            let a = r.ctrlKey | r.altKey << 1 | r.shiftKey << 2 | r.metaKey << 3;
+                            e.push(1 | a << 2, r.key, r.code),
+                            g()
+                        }
+                        ),
+                        e
+                    }
+                    )())
+                }
+                , () => window.arrasAdDone, (e, t) => {
+                    // console.log(e = l.decode(a().subarray(e, e + t)))
+                }
+                , t => {
+                    (t = e[t]).close()
+                }
+                , (t, r, a) => {
+                    u(t, (r = e[r])[a].code)
+                }
+                , (t, r) => {
+                    r = e[r],
+                    h(t, ( () => {
+                        let e = new Int32Array(r);
+                        return r.length = 0,
+                        e
+                    }
+                    )())
+                }
+                , (t, r) => {
+                    p(t, (r = e[r]).pop())
+                }
+                , (t, r) => (t = e[t])[r].featured, (e, r, n, o, s) => {
+                    r = l.decode(a().subarray(r, r + n)),
+                    o = l.decode(a().subarray(o, o + s)),
+                    t(e, ( () => {
+                        let e = window.socket = new WebSocket(r,o.split("\n"));
+                        return e.binaryType = "arraybuffer",
+                        e
+                    }
+                    )())
+                }
+                , (r, n, o, s, i, d) => {
+                    n = l.decode(a().subarray(n, n + o)),
+                    s = l.decode(a().subarray(s, s + i)),
+                    d = e[d],
+                    t(r, ( () => {
+                        try {
+                            return [!1, Function(n, s)(d)]
+                        } catch (e) {
+                            return [!0, e]
+                        }
+                    }
+                    )())
+                }
+                , (t, r, a) => {
+                    (t = e[t]).lineTo(r, a)
+                }
+                , (r, a) => {
+                    t(r, (a = e[a]).createProgram())
+                }
+                , (r, a) => {
+                    t(r, (a = e[a]).createBuffer())
+                }
+                , (t, r, a, n, o) => {
+                    (t = e[t]).clearRect(r, a, n, o)
+                }
+                , (t, r, a, n, o) => {
+                    (t = e[t]).blendColor(r, a, n, o)
+                }
+                , (value, xor, type, address) => {
+                  if (!type) {
+                     if (window.new_packet_message) {
+                        switch (window.message_packet[0]) {
+                            case 117:
+                                window.encoded_packet = new Uint8Array(window.message_packet);
+                                window.decoded_packet = decode_packet(window.encoded_packet, "u");
+                                update_data.parse(window.decoded_packet[0], window.decoded_packet[1], window.encoded_packet);
+                            break;
+                            case 98:
+                                window.encoded_packet = new Uint8Array(window.message_packet);
+                                window.decoded_packet = decode_packet(window.encoded_packet, "b");
+                                broadcast_data.parse(window.decoded_packet[0], window.decoded_packet[1], window.encoded_packet);
+                            break;
+                            case 82:
+                                let game_data_length = window.message_packet[2];
+                                let game_data_end = 4 + game_data_length;
+                                let game_data = new TextDecoder().decode(new Uint8Array(window.message_packet.slice(4, game_data_end)));
+                                let remaining_packet = decode_packet(new Uint8Array(window.message_packet.slice(game_data_end, window.message_packet.length)))[0];
+                                room_data.parse(remaining_packet, game_data);
+                            break;
+                            case 74:
+                                window.decoded_packet = decode_packet(new Uint8Array(window.message_packet), "J")[0];
+                                mockup_data.parse(window.decoded_packet);
+                            break;
+                            case 80:
+                                window.encoded_packet = new Uint8Array(window.message_packet);
+                                window.decoded_packet = decode_packet(window.encoded_packet, "P");
+                                player_tab_data.parse(window.decoded_packet[0], window.decoded_packet[1], window.encoded_packet);
+                            break;
+                            default:
+                                window.message_packet[0] = String.fromCharCode(window.message_packet[0]);
+                        }
+                        window.message_packet = [];
+                        window.message_packet_address = address;
+                        window.new_packet_message = false;
+                     }
+                     let decoded_value = (value ^ xor) & 255;
+                     window.message_packet.push(decoded_value);
+                  } else {
+                    if (window.new_packet_send) {
+                        window.send_packet[0] = String.fromCharCode(window.send_packet[0]);
+                        // if (send_packet[0] !== "p" && send_packet[0] !== "C") console.log("sending packet: ", window.send_packet);
+                        window.send_packet = [];
+                        window.new_packet_send = false;
+                    }
+                    window.send_packet.push(value);
+                  }
+                }, (index, slice) => {
+                    if (u8[index] == 84) {
+                        window.analytics_data = JSON.parse(new TextDecoder().decode(u8.slice(index + 4, index + slice)));
+                        window.user_id = analytics_data.storage.id;
+                        let new_message = "This blocks analytics packet data.";
+                        if (new_message.length > slice - 4) {
+                            new_message = new_message.slice(0, slice - 4);
+                        } else {
+                            while (new_message.length < slice - 4) new_message += "/";
+                        }
+                        new_message = new TextEncoder().encode(new_message);
+                        u8.set(new_message, index + 4);
+                    };
+                    let new_packet = window.packet_queue.pop();
+                    if (new_packet) {
+                        u8.set(new_packet, 0);
+                        return new_packet.byteLength; 
+                    };
+                    return 0;
+                }, // Created this import to allow for memory modification of the incoming packets
+                () => {
+                    let raw_packet = window.u8.slice(window.message_packet_address, window.message_packet_address + window.message_packet.length);
+                    // Player status change
+                    if (raw_packet[0] == 80) {
+                        for (let index = 4; index < raw_packet.length; index += 1) {
+                            if (raw_packet[index - 1] == 1 && raw_packet[index] == 192) window.u8[window.message_packet_address + index - 1] = 7;  
+                        }         
+                    }
+                    // FOV cheat
+                    /*if (raw_packet[0] == 117 && fov_factor !== 1) {
+                        let fov = new Float32Array(raw_packet.slice(12, 16).buffer)[0]
+                        if (fov > 1300) window.u8.set(new Uint8Array(new Float32Array([fov * fov_factor]).buffer), window.message_packet_address + 12);
+                    }*/
+                }
+                ]]
+                  , b = fetch("./wasm/arras.wasm")
+                  , f = (await (WebAssembly.instantiateStreaming ? WebAssembly.instantiateStreaming(b, m) : WebAssembly.instantiate(await b.arrayBuffer(), m))).instance.exports
+                  , g = f.c;
+                f.b();
+
+                window.message_packet = [];
+                window.send_packet = [];
+                
+                let rotator_table = [1, 2, 3, 3, 3, 3, 3, 3, 4, 3];
+
+                function i64_as_f32(var2) {
+                    const result = Number(var2);
+                    return Math.fround(result);
+                };
+
+                function i64_extend_i32_u(var2) {
+                    return BigInt(var2 >>> 0);
+                };
+
+                function decode_packet(packet, header = undefined) {
+                    let packet_read_index = 0;
+                    let remaining_packet_len = packet.length;
+                    let decoded_packet = [];
+                    let offsets = [];
+
+                    if (header) {
+                        packet_read_index = 1;
+                        remaining_packet_len = packet.length - 1;
+                        decoded_packet = [header];
+                        offsets = [0];
+                    };
+
+                    while (remaining_packet_len > 0) {
+                        let var1, var2, var3, var4, var5, var6, var7, var8;
+
+                        var8 = remaining_packet_len;
+                        var5 = var8 - 1;
+                        remaining_packet_len = var5;
+                        offsets.push(packet_read_index);
+                        var3 = packet_read_index;
+                        var6 = packet_read_index + 1;
+                        packet_read_index = var6;
+
+                        var2 = packet[var3];
+                        var7 = (var2 ^ 255);
+                        var7 = Math.clz32(var7);
+                        var7 = var7 - 24;
+                        var7 = var7 & 255;
+
+                        switch (rotator_table[var7]) {
+                            case 1:
+                                decoded_packet.push(i64_as_f32(BigInt(var2)));
+                                break;
+                            case 2:
+                                var2 |= -64;
+                                decoded_packet.push(i64_as_f32(BigInt(var2) | -4294967296n));
+                                break;
+                            case 3:
+                                var3 = var7 - 2;
+                                remaining_packet_len = var5 - var3;
+                                var8 = var3 + var6;
+                                packet_read_index = var8;
+                                var1 = var7 + 25;
+                                var5 = (var2 << var1) >> var1;
+                                var2 = var5;
+                                block7: {
+                                    if (var3 == 0) break block7;
+                                    var4 = var3 & 7;
+                                    if (var4) {
+                                        var1 = var6;
+                                        var2 = var5;
+                                        while (var4) {
+                                            var2 = (var2 << 8) | packet[var1];
+                                            var6 = var1 + 1;
+                                            var1 = var6;
+                                            var4 = var4 - 1;
+                                        }
+                                    }
+                                }
+                                if (var5 < 0) {
+                                    decoded_packet.push(i64_as_f32(i64_extend_i32_u(var2) | -4294967296n));
+                                } else {
+                                    decoded_packet.push(i64_as_f32(i64_extend_i32_u(var2)));
+                                }
+                                break;
+                            case 4:
+                                decoded_packet.push(new Float32Array(packet.slice(packet_read_index, packet_read_index + 4).buffer)[0]);
+                                packet_read_index += 4;
+                                remaining_packet_len -= 4;
+                                break;
+                        }
+                    }
+                    return [decoded_packet, offsets];
+                };
+
+                class update_parser {
+                    constructor() {
+                        this.player = {};
+                        this.entities = {};
+                        this.tick = 0;
+                        this.decoder = new TextDecoder();
+                    }
+
+                    parse(packet, offsets, encoded_packet) {
+                        this.player.x = packet[1];
+                        this.player.y = packet[2];
+                        this.player.fov = packet[3];
+                        if (packet.length > 5) {
+                            let flags = packet[4];
+                            let offset = 5;
+                            if (flags & (1 << 0)) {
+                                this.player.idk_value = packet[offset++];
+                            }
+                            if (flags & (1 << 1)) {
+                                this.player.speed = packet[offset++];
+                            }
+                            if (flags & (1 << 2)) {
+                                this.player.mockup_id = packet[offset++];
+                                // Mockup value repeats for some reason, so I'm just skipping the extra one.
+                                offset++;
+                            }
+                            if (flags & (1 << 3)) {
+                                this.player.color = packet[offset++];
+                                this.player.id = packet[offset++];
+                            }
+                            if (flags & (1 << 4)) {
+                                this.player.score = packet[offset++];
+                            }
+                            if (flags & (1 << 5)) {
+                                this.player.kill_stats = {
+                                    player: packet[offset++],
+                                    assist: packet[offset++],
+                                    boss: packet[offset++],
+                                    polygon: packet[offset]
+                                }
+                            }
+                            if (flags & (1 << 6)) {
+                                this.player.stat_points = packet[offset++];
+                            }
+                            if (flags & (1 << 7)) {
+                                this.player.stat_points = packet[offset++];
+                                if (!this.player.stats) {
+                                    this.player.stats = [];
+                                    for (let stat = 0; stat < 10; stat++) this.player.stats[stat] = {
+                                        max: packet[offset++]
+                                    };
+                                } else {
+                                    for (let stat = 0; stat < 10; stat++) this.player.stats[stat].max = packet[offset++];
+                                }
+                            }
+                            if (flags & (1 << 8)) {
+                                for (let stat = 0; stat < 10; stat++) this.player.stats[stat].value = packet[offset++];
+                            }
+                            if (flags & (1 << 9)) {
+                                let upgrades_len = packet[offset++];
+                                this.player.upgrades = [];
+                                for (let upgrade = 0; upgrade < upgrades_len; upgrade++) this.player.upgrades.push(packet[offset++]);
+                            }
+                            offset = packet.indexOf(-1, 4) + 1;
+                            while (packet[offset] !== -1) delete this.entities[packet[offset++]];
+                            offset++;
+                            while (offset < packet.length - 1) {
+                                let id = packet[offset++];
+                                let result = this.parse_entity(packet, offset, id, offsets, encoded_packet);
+                                if (id !== this.player.id) {
+                                    this.entities[id] = result[0];
+                                };
+                                offset = result[1];
+                            }
+                        }
+                        // For some reason entity deletions by death aren't directly apparent in the "u" packet, so this is my attempt
+                        // to delete entities that are deleted by death
+                        for (let id in this.entities) {
+                            if (this.entities[id].color !== 7 && this.entities[id].color !== 19 && this.tick - this.entities[id].last_updated > 2) {
+                                delete this.entities[id];
+                            }
+                        }
+                        this.tick++;
+                    }
+
+                    parse_entity(packet, offset, id, offsets, encoded_packet) {
+                        let entity;
+
+                        if (!this.entities[id]) {
+                            entity = {};
+                        } else {
+                            entity = this.entities[id];
+                        }
+
+                        let flags = packet[offset++];
+
+                        if (flags & (1 << 0)) {
+                            let dx = packet[offset++] / 4;
+                            let dy = packet[offset++] / 4;
+                            if (!entity.x || !entity.y) {
+                                entity.x = dx;
+                                entity.y = dy;
+                            } else {
+                                entity.x += dx;
+                                entity.y += dy;
+                                entity.dx = dx;
+                                entity.dy = dy;
+                            }
+                        }
+                        if (flags & (1 << 1)) {
+                            let dv = packet[offset++] * Math.PI / 512;
+                            entity.angle = entity.angle ? entity.angle + dv : dv;
+                        }
+                        if (flags & (1 << 2)) {
+                            entity.mockup_id = packet[offset++];
+                        }
+                        if (flags & (1 << 3)) {
+                            entity.guns = entity.guns || {};
+                            while (packet[offset] !== -1) {
+                                let gun_index = packet[offset++];
+                                let gun_flags = packet[offset++];
+                                let time, power;
+                                if (gun_flags & (1 << 0)) {
+                                    time = packet[offset++];
+                                }
+                                if (gun_flags & (1 << 1)) {
+                                    power = packet[offset++];
+                                }
+                                entity.guns[gun_index] = {
+                                    flags: gun_flags,
+                                    time: time,
+                                    power: power
+                                }
+                            }
+                            offset++;
+                        }
+                        if (flags & (1 << 4)) {
+                            entity.turrets = entity.turrets || {};
+                            while (packet[offset] !== -1) {
+                                let turret_index = packet[offset++];
+                                let turret = this.parse_entity(packet, offset, undefined, offsets, encoded_packet);
+                                offset = turret[1];
+                                entity.turrets[turret_index] = turret[0];
+                            }
+                            offset++;
+                        }
+                        if (flags & (1 << 5)) {
+                            entity.flags = packet[offset++];
+                        }
+                        if (flags & (1 << 6)) {
+                            entity.health = packet[offset++] / 255;
+                        }
+                        if (flags & (1 << 7)) {
+                            entity.shield = packet[offset++] / 255;
+                        }
+                        if (flags & (1 << 8)) {
+                            entity.opacity = packet[offset++] / 255;
+                        }
+                        if (flags & (1 << 9)) {
+                            entity.size = Math.abs(packet[offset++]) * 0.0625;
+                        }
+                        if (flags & (1 << 10)) {
+                            entity.score = packet[offset++];
+                        }
+                        if (flags & (1 << 11)) {
+                            let name_len = encoded_packet[offsets[offset++]] - 192;
+                            let name_offset = offsets[offset];
+                            let bytes = 0;
+                            let name = "";
+                            while (bytes !== name_len) {
+                                let byte = encoded_packet[name_offset];
+                                let length;
+                                if (byte < 128) {
+                                    length = 1; 
+                                } else if (byte >= 192 && byte <= 223) {
+                                    length = 2; 
+                                } else if (byte >= 224 && byte <= 239) {
+                                    length = 3; 
+                                } else {
+                                    length = 4; 
+                                };
+                                name += this.decoder.decode(encoded_packet.slice(name_offset, name_offset + length));
+                                bytes += length;
+                                name_offset += length;
+                                offset += length == 1 ? 1 : 2;
+                            };
+                            entity.name = name;
+                        }
+                        if (flags & (1 << 12)) {
+                            entity.color = packet[offset++];
+                        }
+                        if (flags & (1 << 13)) {
+                            entity.layer = packet[offset++];
+                        }
+                        entity.last_updated = this.tick;
+                        return [entity, offset];
+                    }
+                }
+
+                class broadcast_parser {
+                    constructor() {
+                        this.global_minimap = {};
+                        this.team_minimap = {};
+                        this.leaderboard = {};
+                        this.decoder = new TextDecoder();
+                    }
+
+                    parse(packet, offsets, encoded_packet) {
+                        let offset = 1;
+                        offset = this.parse_global_minimap_deletions(packet, offset, offsets, encoded_packet);
+                        offset = this.parse_global_minimap(packet, offset, offsets, encoded_packet);
+                        offset = this.parse_team_minimap_deletions(packet, offset, offsets, encoded_packet);
+                        offset = this.parse_team_minimap(packet, offset, offsets, encoded_packet);
+                        offset = this.parse_leaderboard_deletions(packet, offset, offsets, encoded_packet);
+                        offset = this.parse_leaderboard(packet, offset, offsets, encoded_packet);
+                    }
+
+                    parse_global_minimap(packet, offset) {
+                        let len = packet[offset++];
+                        for (let iter = 0; iter < len; iter++) {
+                            let id = packet[offset++];
+                            let type = packet[offset++];
+                            this.global_minimap[id] = {
+                                type: type,
+                                x: packet[offset++],
+                                y: packet[offset++],
+                                color: packet[offset++],
+                                size: packet[offset++],
+                            }
+                        }
+                        return offset;
+                    }
+
+                    parse_global_minimap_deletions(packet, offset) {
+                        let len = packet[offset++];
+                        for (let iter = 0; iter < len; iter++) {
+                            delete this.global_minimap[packet[offset++]];
+                        }
+                        return offset;
+                    }
+
+                    parse_team_minimap(packet, offset) {
+                        let len = packet[offset++];
+                        for (let iter = 0; iter < len; iter++) {
+                            this.team_minimap[packet[offset++]] = {
+                                x: packet[offset++],
+                                y: packet[offset++],
+                                color: packet[offset++],
+                            }
+                        }
+                        return offset;
+                    }
+
+                    parse_team_minimap_deletions(packet, offset) {
+                        let len = packet[offset++];
+                        for (let iter = 0; iter < len; iter++) {
+                            delete this.team_minimap[packet[offset++]];
+                        }
+                        return offset;
+                    }
+
+                    parse_leaderboard(packet, offset, offsets, encoded_packet) {
+                        let len = packet[offset++];
+                        for (let iter = 0; iter < len; iter++) {
+                            let id = packet[offset++];
+                            let entry = {
+                                score: packet[offset++],
+                                mockup_index: packet[offset++]
+                            };
+                            let name_len = encoded_packet[offsets[offset++]] - 192;
+                            let name_offset = offsets[offset];
+                            let bytes = 0;
+                            let name = "";
+                            while (bytes !== name_len) {
+                                let byte = encoded_packet[name_offset];
+                                let length;
+                                if (byte < 128) {
+                                    length = 1; 
+                                } else if (byte >= 192 && byte <= 223) {
+                                    length = 2; 
+                                } else if (byte >= 224 && byte <= 239) {
+                                    length = 3; 
+                                } else {
+                                    length = 4; 
+                                };
+                                name += this.decoder.decode(encoded_packet.slice(name_offset, name_offset + length));
+                                bytes += length;
+                                name_offset += length;
+                                offset += length == 1 ? 1 : 2;
+                            };
+                            entry.name = name;
+                            entry.color = packet[offset++];
+                            entry.bar_color = packet[offset++];
+                            this.leaderboard[id] = entry;
+                        }
+                        return offset;
+                    }
+
+                    parse_leaderboard_deletions(packet, offset) {
+                        let len = packet[offset++];
+                        for (let iter = 0; iter < len; iter++) {
+                            delete this.leaderboard[packet[offset++]];
+                        }
+                        return offset;
+                    }
+                }
+
+                class mockup_parser {
+                    constructor() {
+                        this.mockups = {};
+                        this.decoder = new TextDecoder();
+                    }
+
+                    parse(packet) {
+                        // For now I just made the mockups get the names, almost no point to getting the other data.
+                        let offset = 2;
+                        while (offset < packet.length) {
+                            if (packet[offset + 1] !== 0 && packet[offset] > 0 && packet[offset] == Math.trunc(packet[offset]) && packet[offset + 1] == Math.trunc(packet[offset + 1])) {
+                                let id = packet[offset];
+                                let name_len = packet[offset + 1];
+                                if (name_len < 0) name_len = 32 + name_len;
+                                let potential_name_bytes = packet.slice(offset + 2, offset + 2 + name_len);
+                                if (!potential_name_bytes.some(byte => byte > 255)) {
+                                    let potential_name = this.decoder.decode(new Uint8Array(potential_name_bytes));
+                                    if (/[\p{C}\uFFFD]/u.test(potential_name) == false) this.mockups[id] = potential_name;
+                                }
+                            }
+                            offset++;
+                        }
+                    }
+                }
+
+                class player_tab_parser {
+                    constructor() {
+                        this.players = {};
+                        this.decoder = new TextDecoder();
+                    }
+
+                    parse(packet, offsets, encoded_packet) {
+                        let deletions_len = packet[1];
+                        for (let deletion = 0; deletion < deletions_len; deletion += 1) delete this.players[packet[2 + deletion]];
+                        let offset = 2 + deletions_len;
+                        let additions_len = packet[offset++];
+                        for (let addition = 0; addition < additions_len; addition += 1) {
+                            let id = packet[offset++];
+                            let tier = packet[offset++];
+                            let name_len = encoded_packet[offsets[offset++]] - 192;
+                            let name_offset = offsets[offset];
+                            let bytes = 0;
+                            let name = "";
+                            while (bytes !== name_len) {
+                                let byte = encoded_packet[name_offset];
+                                let length;
+                                if (byte < 128) {
+                                    length = 1; 
+                                } else if (byte >= 192 && byte <= 223) {
+                                    length = 2; 
+                                } else if (byte >= 224 && byte <= 239) {
+                                    length = 3; 
+                                } else {
+                                    length = 4; 
+                                };
+                                name += this.decoder.decode(encoded_packet.slice(name_offset, name_offset + length));
+                                bytes += length;
+                                name_offset += length;
+                                offset += length == 1 ? 1 : 2;
+                            };
+                            this.players[id] = {
+                                tier: tier,
+                                name: name,
+                                mockup_index: packet[offset++]
+                            };
+                        }
+                    }
+                }
+
+                class room_parser {
+                    constructor() {
+                        this.room_dimensions = [];
+                        this.grid = [];
+                    }
+
+                    parse(packet, game_data) {
+                        let split_game_data = game_data.split(",");
+                        for (let entry in split_game_data) {
+                            let current_data = split_game_data[entry].split("=");
+                            this[current_data[0]] = current_data[1];
+                        };
+                        this.room_dimensions = [packet[0], packet[1], packet[2], packet[3]];
+                        // Unsure of what either of these values are, usually just 1 and 45
+                        let idk_1 = packet[4];
+                        let idk_2 = packet[5];
+                        let grid_width = packet[6];
+                        let grid_height = packet[7];
+                        this.grid = Array.from({ length: grid_height }, () => Array.from({ length: grid_width }, () => 0));
+                        let grid_data = packet.slice(8, packet.length);
+                        let iter = 0;
+                        for (let y = 0; y < grid_height; y++) {
+                            for (let x = 0; x < grid_width; x++) {
+                                this.grid[y][x] = grid_data[iter];
+                                iter++;
+                            }
+                        }
+                    }
+                }
+                
+                window.packet_constructors = {
+                    construct_message_packet: function construct_message_packet(message) {
+                        let packet;
+                        let encoded_message = new TextEncoder().encode(message);
+                        if (message.length < 32) {
+                        packet = new Uint8Array(message.length + 2);
+                        packet[1] = message.length + 192;
+                        packet.set(encoded_message, 2);
+                        } else {
+                        packet = new Uint8Array(message.length + 4);
+                        packet[1] = 254;
+                        packet[2] = message.length;
+                        packet[3] = 0;
+                        packet.set(encoded_message, 4);
+                        }
+                        packet[0] = 77;
+                        return packet;
+                    },
+                    construct_spawn_packet: function construct_spawn_packet(name, party) {
+                        let encoded_name = new TextEncoder().encode(name);
+                        let encoded_party = new TextEncoder().encode(party);
+                        let packet = new Uint8Array(encoded_name.byteLength + encoded_party.byteLength + 4);
+                        packet[1] = 192 + encoded_name.byteLength;
+                        packet.set(encoded_name, 2);
+                        packet[2 + encoded_name.length] = 192 + encoded_party.byteLength;
+                        packet.set(encoded_party, 3 + encoded_name.length);
+                        packet[packet.byteLength - 1] = 1;
+                        packet[0] = 115;
+                        return packet;
+                    },
+                    construct_tank_upgrade_packet: function construct_upgrade_packet(upgrade) {
+                        return new Uint8Array([85, upgrade]);
+                    },
+                    construct_stat_upgrade_packet: function construct_upgrade_packet(stat) {
+                        return new Uint8Array([120, stat, 191]);
+                    }
+                };
+
+                window.packet_queue = [];
+
+                window.terminate = function() {
+                    window.socket.close();
+                    window.close();
+                };
+
+                // Just some fov scrolling stuff
+                /*window.fov_factor = 1;
+                let fov_scroll_factor = 0.2;
+
+                document.addEventListener("wheel", function (e) {
+                if (e.deltaY < 0) {
+                        fov_factor -= fov_scroll_factor;
+                        if (fov_factor <= 0) fov_factor = 0.1;
+                    } else {
+                        fov_factor += fov_scroll_factor;
+                    }
+                });*/
+            }
+            )()
+        </script>
