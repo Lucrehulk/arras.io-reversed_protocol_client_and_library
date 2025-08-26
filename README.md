@@ -3,8 +3,8 @@ A custom arras.io client of mine with a ton of neat features--included fully dec
 
 Client contains functionality for -
 ```
-Parsing critical incoming packets "u"pdate, "b"roadcast, "R"oom, "M"ockups (names only), "P"layer tab data all have complete parsers.
+Parsing critical incoming packets (full access to things like room, entities, broadcast, mockup data, & more).
 Logging and modifying incoming and outgoing packets.
 Writing/constructing custom outgoing packets.
-& More
+& more.
 ```
