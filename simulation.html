@@ -1454,7 +1454,7 @@
                             let flags = packet[4];
                             let offset = 5;
                             if (flags & (1 << 0)) {
-                                this.player.idk_value = packet[offset++];
+                                this.player.mspt = packet[offset++];
                             }
                             if (flags & (1 << 1)) {
                                 this.player.speed = packet[offset++];
