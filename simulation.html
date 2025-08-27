@@ -1586,6 +1586,15 @@
                         }
                         if (flags & (1 << 5)) {
                             entity.flags = packet[offset++];
+                            entity.flags_data = entity.flags_data || {};
+                            if (entity.flags & (1 << 0)) entity.flags_data.auto_spin = true;
+                            if (entity.flags & (1 << 1)) entity.flags_data.reverse_tank = true;
+                            // Not certain exactly what this flag is, but it only turns true (and stays on) after a player has moved themselves (not been pushed, directly moved via their input), and is never turned true for bullets.
+                            if (entity.flags & (1 << 2)) entity.flags_data.has_moved = true;
+                            if (entity.flags & (1 << 3)) entity.flags_data.invuln = true;
+                            // Note that both of these damage indicators can be turned on, which indicates max damage/penetration. Sort of like a "regular" hit and "critical" hit indicator, with second_degree being stronger than first, and both being on the max.
+                            if (entity.flags & (1 << 4)) entity.flags_data.damange_indicator_first_degree = true;
+                            if (entity.flags & (1 << 4)) entity.flags_data.damange_indicator_second_degree = true;
                         }
                         if (flags & (1 << 6)) {
                             entity.health = packet[offset++] / 255;
