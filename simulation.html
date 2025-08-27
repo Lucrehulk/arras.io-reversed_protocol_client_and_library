@@ -1586,7 +1586,7 @@
                         }
                         if (flags & (1 << 5)) {
                             entity.flags = packet[offset++];
-                            entity.flags_data = entity.flags_data || {};
+                            entity.flags_data = {};
                             if (entity.flags & (1 << 0)) entity.flags_data.auto_spin = true;
                             if (entity.flags & (1 << 1)) entity.flags_data.reverse_tank = true;
                             // Not certain exactly what this flag is, but it only turns true (and stays on) after a player has moved themselves (not been pushed, directly moved via their input), and is never turned true for bullets.
