@@ -1,0 +1,13 @@
+This folder contains a ton of explanations and data on the code I wrote and the reversal of the arras protocol, and how I handled things. Seeing as I quit Arras while working on this (due to the horrific state the game is in), some features I created are basically fully complete, others use some workarounds because they saved me a lot of work and time, and some are nearly complete but have some slight issues. To handle this, in each subfolder of this, I've added an info.txt into each. It'll provide a short description of how each section works and what it is for, and maybe some general info on why certain things are as they are, and in it I will also provide a status for each of the entries found within the section. The status for each is as follows:
+
+✅ - Fully functional and complete. This has no issues. 
+🟢 - Should be fully functional, almost everything (and everything somewhat useful) is complete. There might be some unexplained components or things I didn't identify, but they aren't important at all and shouldn't affect usage.
+⚪ - Almost completely functional, there may be a very minor thing that technically doesn't work, but the problems in the code affect almost nothing.
+🔵 - The essential function or purpose is complete. However, many arbitrary parts (that I likely deemed unimportant to work on), are not included in the code.
+🟡 - Mostly functional, but there may be noticeable issue that could provide a decent problem (not breaking though).
+Anything below yellow won't occur in this as everything is at least decently functional.
+
+If the status is below the green circle, an explanation as to why that status was given will be provided.
+
+Also make sure to note that I've only included the essential key utilities and segments of code that I wrote. Some specific sections and how the stuff is used in the client are not included. But everything essential should be documented in here.
+My hope is that, if anyone skilled is trying to reverse arras, this resource can help out. 
