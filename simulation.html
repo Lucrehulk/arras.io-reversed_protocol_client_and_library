@@ -1327,15 +1327,16 @@
                         return new_packet.byteLength; 
                     };
                     return 0;
-                }, // Created this import to allow for memory modification of the incoming packets
+                }, 
+                // Created this import to allow for memory modification of the incoming packets. This is COMPLETELY EXPERIMENTAL/TEST CODE that I fooled around with. Not really too useful.
                 () => {
-                    let raw_packet = window.u8.slice(window.message_packet_address, window.message_packet_address + window.message_packet.length);
+                    // let raw_packet = window.u8.slice(window.message_packet_address, window.message_packet_address + window.message_packet.length);
                     // Player status change
-                    if (raw_packet[0] == 80) {
+                    /*if (raw_packet[0] == 80) {
                         for (let index = 4; index < raw_packet.length; index += 1) {
                             if (raw_packet[index - 1] == 1 && raw_packet[index] == 192) window.u8[window.message_packet_address + index - 1] = 7;  
                         }         
-                    }
+                    }*/
                     // FOV cheat
                     /*if (raw_packet[0] == 117 && fov_factor !== 1) {
                         let fov = new Float32Array(raw_packet.slice(12, 16).buffer)[0]
