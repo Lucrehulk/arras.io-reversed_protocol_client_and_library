@@ -4,5 +4,4 @@ spawn_constructor - ⚪ - Again, the same issue with message_constructor is in t
 stat_upgrade_constructor - ✅
 tank_upgrade_constructor - ✅
 
-🔴 - "C"ontrol packet constructor. Handles basic tank movements but does have an odd structure. 
-
+🔴 - "C"ontrol packet constructor. Handles basic tank movements but does have an odd structure.
