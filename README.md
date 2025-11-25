@@ -4,6 +4,8 @@ I never fully completed everything and this client is missing some stuff, but it
 
 I spent some time writing up a "reverse_engineering" folder, which contains a ton of explanations and data on the special code I've created for this game. My hope is that, by releasing this and providing info, skilled coders who want to work on Arras still can use this as a resource.
 
+Also yes I am aware there are some odd things about the client like test boxes being bugged, this was my own personal client which I utilized for reverse engineering purposes as mentioned before. I tinkered with a lot of things within the client and so there may be some odd things like that.
+
 Old readme stuff below.
 
 A custom arras.io client of mine with a ton of neat features--included fully decoded packets and parsing for them.
