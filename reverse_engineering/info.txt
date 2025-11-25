@@ -5,7 +5,8 @@ This folder contains a ton of explanations and data on the code I wrote and the 
 ⚪ - Almost completely functional, there may be a very minor thing that technically doesn't work, but the problems in the code affect almost nothing.
 🔵 - The essential function or purpose is complete. However, many arbitrary parts (that I likely deemed unimportant to work on), are not included in the code.
 🟡 - Mostly functional, but there may be noticeable issue that could provide a decent problem (not breaking though).
-Anything below yellow won't occur in this as everything is at least decently functional.
+Anything below yellow that has been started won't occur in this as everything is at least decently functional.
+🔴 - Not worked on, and there won't even be a file inclhded for the code segment being held in respect to this. Quit before I could finish but if someone else takes this up or I return to arras at some point, this is notable enough to actually be completed. Things that haven't been started but aren't notable won't even be mentioned.
 
 If the status is below the green circle, an explanation as to why that status was given will be provided.
 
