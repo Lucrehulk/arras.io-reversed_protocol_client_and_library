@@ -2,5 +2,7 @@ This section contains code for constructing the encoded packets that allow the c
 message_constructor - ⚪ - This does pretty much work, but there is a minor caveat. Due to the weird sort of text encoding Arras uses (as I mentioned before), and the fact this parser only uses a basic TextEncoder for utff-8, only single byte characters (so every regular character on your keyboard still, which is by far the most important stuff), will work as intended.
 spawn_constructor - ⚪ - Again, the same issue with message_constructor is in the spawn_constructor. The string data you input should only be single byte utf-8 characters, but this really only affects your name and it barely limits it for the reasons mentioned in the prior entry.
 stat_upgrade_constructor - ✅
-
 tank_upgrade_constructor - ✅
+
+🔴 - "C"ontrol packet constructor. Handles basic tank movements but does have an odd structure. 
+🔴 - Special input packet, this one is super easy it's just the packet's header, then a number after it like 0-2 or something representing autospin, auto fire, and override and that kind of stuff. Basically just like the stat and tank upgrade constructors, only requires a few lines but I didn't add it in here just because I forgot about it. May honestly just add this later.
