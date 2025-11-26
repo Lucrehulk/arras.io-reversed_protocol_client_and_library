@@ -1,8 +1,9 @@
 This section includes code for the incoming packet parsers I wrote. Note that I did not write parsers for every packet--only the ones I found essential or interesting (in the case of the player tab, as it was a newer feature I wanted to reverse). 
-Update parser - 🟡 - This is almost completely functional. There is only one major issue: for some reason, it appears direct entity deaths are not deleted or something of the sorts. This was first reported to me by vec3f, who was experimenting with some of this code and came across the issue. Having basically quit arras, I never really spent too much time figuring why this issue occurred, or really fixing it. It does exist though and there is a scuffed placeholder fix so that the entities don't grow too large.
+Update parser - 🟡 - This is almost completely functional. There is only one major issue: for some reason, it appears direct entity deaths are not deleted or something of the sorts. This issue does not occur when entities move outside of your camera. This was first reported to me by vec3f, who was experimenting with some of this code and came across the issue. Having basically quit arras, I never really spent too much time figuring why this issue occurred, or really fixing it. It does exist though and there is a scuffed placeholder fix so that the entities don't grow too large.
 Broadcast parser - ✅
 Mockup parser - 🔵 - The essential function of mapping mockup name to ID is complete. Do note there is some data on the actual mockup definitions and their structure, but it wasn't worth the work of reversing it to me. The important part is functional.
 Room parser - 🟢
 Player tab parser - ✅
 
 🔴 - "F"/death packet parser. Just provides the stats and data for the death screen. Never seemed important for my usage but I'm still giving it a red marker in case someone wants to do something with it.
+
