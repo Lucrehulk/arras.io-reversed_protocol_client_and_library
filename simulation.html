@@ -1892,8 +1892,8 @@
                     construct_tank_upgrade_packet: function construct_upgrade_packet(upgrade) {
                         return new Uint8Array([85, upgrade]);
                     },
-                    construct_stat_upgrade_packet: function construct_upgrade_packet(stat) {
-                        return new Uint8Array([120, stat, 191]);
+                    construct_stat_upgrade_packet: function construct_stat_upgrade_packet(stat, len) {
+                        return new Uint8Array([120, stat, len]);
                     }
                 };
 
