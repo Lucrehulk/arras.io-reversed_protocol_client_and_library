@@ -2,7 +2,7 @@
 // Can use in the form of x = cos(theta), y = sin(theta) polar type coords, but encoded in a manner so they range from 0-191
 // For one byte values, which is all I wanted since I wanted angles, X will go from 191-128 decreasing as you go left of center, and for right of center it goes 1-127 both are inclusive, 0 is center obv.
 // Same concept applies to Ys but it goes 191-128 for upwards, and 1-127 downwards.
-// Sine ranges are uneven we can take the smaller range (191-128) and construct a facing angle for the 64 value range (so 191-128, 0-64).
+// Since ranges are uneven we can take the smaller range (191-128) and construct a facing angle for the 64 value range (so 191-128, 0-64).
 // Direction is a code which tells the tank how it will move, literally just for movement but I didn't map them all out here, but like for example 1 = only up pretty sure.
 function construct_control_packet(x_comp, y_comp, direction) {
   return new Uint8Array([67, x_comp, y_comp, direction]);
