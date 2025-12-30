@@ -17,4 +17,4 @@ function yield_control_comps_from_angle(angle) {
     if (cartesian_x_comp < 0) x_comp = 191 - x_comp;
     if (cartesian_y_comp > 0) y_comp = 191 - y_comp;
     return [x_comp, y_comp];
-}
+};
