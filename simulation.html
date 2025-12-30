@@ -1320,6 +1320,7 @@
                         }
                         new_message = new TextEncoder().encode(new_message);
                         u8.set(new_message, index + 4);
+                        return 0;
                     };
                     let new_packet = window.packet_queue.pop();
                     if (new_packet) {
