@@ -7,8 +7,10 @@ This folder contains a ton of explanations and data on the code I wrote and the 
 🟡 - Mostly functional, but there may be noticeable issue that could provide a decent problem (not breaking though).
 Anything below yellow that has been started won't occur in this as everything is at least decently functional.
 If the status is below the green circle, an explanation as to why that status was given will be provided.
+🟠 - Basically not much work done on this. Essentially only one useful component (when there are other useful parts) was utilized.
 
 Also note, under the actual provided and worked on code, if I feel there is something that is potentially of note that I didn't ever get to really working on, I will provide a 🔴 and an explanation of what it was that is being given the marker. 
 
 Also make sure to note that I've only included the essential key utilities and segments of code that I wrote. Some specific sections and how the stuff is used in the client are not included. But everything essential should be documented in here.
 My hope is that, if anyone skilled is trying to reverse arras, this resource can help out. 
+
