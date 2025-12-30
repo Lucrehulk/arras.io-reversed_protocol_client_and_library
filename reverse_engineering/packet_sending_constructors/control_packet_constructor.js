@@ -12,8 +12,8 @@ function construct_control_packet(x_comp, y_comp, direction) {
 function yield_control_comps_from_angle(angle) {
     let cartesian_x_comp = Math.cos(angle);
     let cartesian_y_comp = Math.sin(angle);
-    let x_comp = Math.floor(cartesian_x_comp * 64);
-    let y_comp = Math.floor(cartesian_y_comp * 64);
+    let x_comp = Math.abs(Math.floor(cartesian_x_comp * 64));
+    let y_comp = Math.abs(Math.floor(cartesian_y_comp * 64));
     if (cartesian_x_comp < 0) x_comp = 191 - x_comp;
     if (cartesian_y_comp > 0) y_comp = 191 - y_comp;
     return [x_comp, y_comp];
