@@ -1851,20 +1851,30 @@
                     }
                 }
                 
+                function yield_control_comps_from_angle(angle) {
+                    let cartesian_x_comp = -Math.cos(angle);
+                    let cartesian_y_comp = Math.sin(angle);
+                    let x_comp = Math.floor(Math.abs(cartesian_x_comp) * 64);
+                    let y_comp = Math.floor(Math.abs(cartesian_y_comp) * 64);
+                    if (cartesian_x_comp < 0) x_comp = 191 - x_comp;
+                    if (cartesian_y_comp > 0) y_comp = 191 - y_comp;
+                    return [x_comp, y_comp];
+                };
+                
                 window.packet_constructors = {
                     construct_message_packet: function construct_message_packet(message) {
                         let packet;
                         let encoded_message = new TextEncoder().encode(message);
                         if (message.length < 32) {
-                        packet = new Uint8Array(message.length + 2);
-                        packet[1] = message.length + 192;
-                        packet.set(encoded_message, 2);
+                            packet = new Uint8Array(message.length + 2);
+                            packet[1] = message.length + 192;
+                            packet.set(encoded_message, 2);
                         } else {
-                        packet = new Uint8Array(message.length + 4);
-                        packet[1] = 254;
-                        packet[2] = message.length;
-                        packet[3] = 0;
-                        packet.set(encoded_message, 4);
+                            packet = new Uint8Array(message.length + 4);
+                            packet[1] = 254;
+                            packet[2] = message.length;
+                            packet[3] = 0;
+                            packet.set(encoded_message, 4);
                         }
                         packet[0] = 77;
                         return packet;
@@ -1881,11 +1891,17 @@
                         packet[0] = 115;
                         return packet;
                     },
-                    construct_tank_upgrade_packet: function construct_upgrade_packet(upgrade) {
+                    construct_tank_upgrade_packet: function construct_tank_upgrade_packet(upgrade) {
                         return new Uint8Array([85, upgrade]);
                     },
                     construct_stat_upgrade_packet: function construct_stat_upgrade_packet(stat, len) {
                         return new Uint8Array([120, stat, len]);
+                    },
+                    construct_command_packet: function construct_command_packet(action) {
+                        return new Uint8Array([116, action]);
+                    },
+                    construct_control_acket: function construct_control_packet(x_comp, y_comp, direction) {
+                        return new Uint8Array([67, x_comp, y_comp, direction]);
                     }
                 };
 
