@@ -77,12 +77,16 @@ class update_parser {
         }
         // Complicated check to filter out completely deleted entities (not sure what the proper method is tbh)
         for (let entity in this.entities) {
-            if (this.tick - this.entities[entity].last_updated > 5 && 
-                (this.entities[entity].health !== 1 || 
+            if (this.tick - this.entities[entity].last_updated > 5 && (
+                Math.abs(this.entities[entity].x - this.player.x) > this.player.fov + 60 + this.entities[entity].size * 2 ||
+                Math.abs(this.entities[entity].y - this.player.y) > this.player.fov * 0.5 + 60 + this.entities[entity].size * 2 ||
+                this.entities[entity].health !== 1 || 
                 this.entities[entity].flags == 0 || 
                 this.entities[entity].flags_data.damage_indicator_first_degree || 
                 this.entities[entity].flags_data.damage_indicator_second_degree ||
-                this.entities[entity].flags_data.auto_spin && this.entities[entity].layer == 10)) {
+                (this.entities[entity].flags_data.auto_spin && this.entities[entity].layer == 10) ||
+                (this.entities[entity].layer == 7 && this.entities[entity].flags_data.invuln)
+                )) {
                 delete this.entities[entity];
             };
         };
@@ -93,7 +97,7 @@ class update_parser {
         let entity;
 
         if (!this.entities[id]) {
-            entity = {};
+            entity = {flags_data: {}};
         } else {
             entity = this.entities[id];
         }
@@ -152,7 +156,6 @@ class update_parser {
         }
         if (flags & (1 << 5)) {
             entity.flags = packet[offset++];
-            entity.flags_data = {};
             if (entity.flags & (1 << 0)) entity.flags_data.auto_spin = true;
             if (entity.flags & (1 << 1)) entity.flags_data.reverse_tank = true;
             // Not certain exactly what this flag is, but it only turns true (and stays on) after a player has moved themselves (not been pushed, directly moved via their input), and is never turned true for bullets.
