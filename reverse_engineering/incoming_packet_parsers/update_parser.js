@@ -69,10 +69,23 @@ class update_parser {
                 let result = this.parse_entity(packet, offset, id, offsets, encoded_packet);
                 if (id !== this.player.id) {
                     this.entities[id] = result[0];
+                } else {
+                    this.player.entity_data = result[0];
                 };
                 offset = result[1];
             }
         }
+        // Complicated check to filter out completely deleted entities (not sure what the proper method is tbh)
+        for (let entity in this.entities) {
+            if (this.tick - this.entities[entity].last_updated > 5 && 
+                (this.entities[entity].health !== 1 || 
+                this.entities[entity].flags == 0 || 
+                this.entities[entity].flags_data.damage_indicator_first_degree || 
+                this.entities[entity].flags_data.damage_indicator_second_degree ||
+                this.entities[entity].flags_data.auto_spin && this.entities[entity].layer == 10)) {
+                delete this.entities[entity];
+            };
+        };
         this.tick++;
     }
 
@@ -146,8 +159,8 @@ class update_parser {
             if (entity.flags & (1 << 2)) entity.flags_data.has_moved = true;
             if (entity.flags & (1 << 3)) entity.flags_data.invuln = true;
             // Note that both of these damage indicators can be turned on, which indicates max damage/penetration. Sort of like a "regular" hit and "critical" hit indicator, with second_degree being stronger than first, and both being on the max.
-            if (entity.flags & (1 << 4)) entity.flags_data.damange_indicator_first_degree = true;
-            if (entity.flags & (1 << 5)) entity.flags_data.damange_indicator_second_degree = true;
+            if (entity.flags & (1 << 4)) entity.flags_data.damage_indicator_first_degree = true;
+            if (entity.flags & (1 << 5)) entity.flags_data.damage_indicator_second_degree = true;
         }
         if (flags & (1 << 6)) {
             entity.health = packet[offset++] / 255;
@@ -173,13 +186,13 @@ class update_parser {
                 let byte = encoded_packet[name_offset];
                 let length;
                 if (byte < 128) {
-                    length = 1; 
+                    length = 1;
                 } else if (byte >= 192 && byte <= 223) {
-                    length = 2; 
+                    length = 2;
                 } else if (byte >= 224 && byte <= 239) {
-                    length = 3; 
+                    length = 3;
                 } else {
-                    length = 4; 
+                    length = 4;
                 };
                 name += this.decoder.decode(encoded_packet.slice(name_offset, name_offset + length));
                 bytes += length;
