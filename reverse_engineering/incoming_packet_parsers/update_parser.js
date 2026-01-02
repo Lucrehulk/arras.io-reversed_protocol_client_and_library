@@ -73,15 +73,6 @@ class update_parser {
                 offset = result[1];
             }
         }
-        // For some reason entity deletions by death aren't directly apparent in the "u" packet, so this is my attempt
-        // to delete entities that are deleted by death
-        for (let id in this.entities) {
-            let flags_data = this.entities[id].flags_data || {};
-            if (((!flags_data.has_moved && !Object.keys(this.entities[id].guns || {}).length) || this.entities[id].health < 0.05) && this.entities[id].color !== 7 && this.entities[id].color !== 19 && this.tick - this.entities[id].last_updated > 2) {
-                console.log(this.entities[id]);
-                delete this.entities[id];
-            }
-        }
         this.tick++;
     }
 
