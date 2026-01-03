@@ -1444,11 +1444,14 @@
                     constructor() {
                         this.player = {};
                         this.entities = {};
+                        this.deleted_entities = [];
                         this.tick = 0;
                         this.decoder = new TextDecoder();
+                        this.static_mockups = [];
                     }
                 
                     parse(packet, offsets, encoded_packet) {
+                        this.deleted_entities = [];
                         this.player.x = packet[1];
                         this.player.y = packet[2];
                         this.player.fov = packet[3];
@@ -1504,7 +1507,10 @@
                                 for (let upgrade = 0; upgrade < upgrades_len; upgrade++) this.player.upgrades.push(packet[offset++]);
                             }
                             offset = packet.indexOf(-1, 4) + 1;
-                            while (packet[offset] !== -1) delete this.entities[packet[offset++]];
+                            while (packet[offset] !== -1) {
+                                let id = packet[offset++];
+                                if (this.entities[id]) this.delete_entity(id, this.entities[id].mockup_id);
+                            };
                             offset++;
                             while (offset < packet.length - 1) {
                                 let id = packet[offset++];
@@ -1514,23 +1520,34 @@
                                 offset = result[1];
                             }
                         }
-                        // Complicated check to filter out completely deleted entities (not sure what the proper method is tbh)
-                        for (let entity in this.entities) {
-                            let dx_check = Math.abs(this.entities[entity].x - this.player.x) > this.player.fov + 60 + this.entities[entity].size * 2;
-                            let dy_check = Math.abs(this.entities[entity].y - this.player.y) > this.player.fov * 0.5 + 60 + this.entities[entity].size * 2;
-                            if (this.tick - this.entities[entity].last_updated > 5 && this.entities[entity].layer !== 11 && (
-                                dx_check ||
-                                dy_check ||
-                                this.entities[entity].health !== 1 || 
-                                this.entities[entity].flags == 0 || 
-                                this.entities[entity].flags_data.damage_indicator_first_degree || 
-                                this.entities[entity].flags_data.damage_indicator_second_degree ||
-                                (this.entities[entity].flags_data.auto_spin && this.entities[entity].layer == 10)
-                                )) {
-                                delete this.entities[entity];
-                            };
-                        };
+                        this.determine_entity_deletions();
                         this.tick++;
+                    }
+                
+                    delete_entity(id, mockup_id) {
+                        if (!this.static_mockups[mockup_id]) {
+                            this.deleted_entities.push(id);
+                            delete this.entities[id];
+                        }
+                    }
+                
+                    determine_entity_deletions() {
+                        for (let id in this.entities) {
+                            let entity = this.entities[id];
+                            let dx_check = Math.abs(entity.x - this.player.x) > this.player.fov + 60 + entity.size * 2;
+                            let dy_check = Math.abs(entity.y - this.player.y) > this.player.fov * 0.5 + 60 + entity.size * 2;
+                            if (this.tick - entity.last_updated > 5 && (
+                            dx_check ||
+                            dy_check ||
+                            entity.health !== 1 ||
+                            (entity.flags_data.autospin && entity.layer > 7) ||
+                            entity.flags == 0 || 
+                            ((entity.flags_data.damage_indicator_first_degree || 
+                            entity.flags_data.damage_indicator_second_degree) && !entity.flags_data.idk_flag)
+                            )) {
+                                this.delete_entity(id, entity.mockup_id);
+                            };
+                        }; 
                     }
                 
                     parse_entity(packet, offset, id, offsets, encoded_packet) {
@@ -1598,8 +1615,8 @@
                             entity.flags = packet[offset++];
                             if (entity.flags & (1 << 0)) entity.flags_data.auto_spin = true;
                             if (entity.flags & (1 << 1)) entity.flags_data.reverse_tank = true;
-                            // Not certain exactly what this flag is, but it only turns true (and stays on) after a player has moved themselves (not been pushed, directly moved via their input), and is never turned true for bullets.
-                            if (entity.flags & (1 << 2)) entity.flags_data.has_moved = true;
+                            // Not certain exactly what this flag is
+                            if (entity.flags & (1 << 2)) entity.flags_data.idk_flag = true;
                             if (entity.flags & (1 << 3)) entity.flags_data.invuln = true;
                             // Note that both of these damage indicators can be turned on, which indicates max damage/penetration. Sort of like a "regular" hit and "critical" hit indicator, with second_degree being stronger than first, and both being on the max.
                             if (entity.flags & (1 << 4)) entity.flags_data.damage_indicator_first_degree = true;
@@ -1654,6 +1671,7 @@
                         return [entity, offset];
                     }
                 }
+                
                 class broadcast_parser {
                     constructor() {
                         this.global_minimap = {};
