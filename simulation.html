@@ -1509,25 +1509,23 @@
                             while (offset < packet.length - 1) {
                                 let id = packet[offset++];
                                 let result = this.parse_entity(packet, offset, id, offsets, encoded_packet);
-                                if (id !== this.player.id) {
-                                    this.entities[id] = result[0];
-                                } else {
-                                    this.player.entity_data = result[0];
-                                };
+                                if (id == this.player.id) this.player.entity_data = result[0];
+                                this.entities[id] = result[0];
                                 offset = result[1];
                             }
                         }
                         // Complicated check to filter out completely deleted entities (not sure what the proper method is tbh)
                         for (let entity in this.entities) {
-                            if (this.tick - this.entities[entity].last_updated > 5 && (
-                                Math.abs(this.entities[entity].x - this.player.x) > this.player.fov + 60 + this.entities[entity].size * 2 ||
-                                Math.abs(this.entities[entity].y - this.player.y) > this.player.fov * 0.5 + 60 + this.entities[entity].size * 2 ||
+                            let dx_check = Math.abs(this.entities[entity].x - this.player.x) > this.player.fov + 60 + this.entities[entity].size * 2;
+                            let dy_check = Math.abs(this.entities[entity].y - this.player.y) > this.player.fov * 0.5 + 60 + this.entities[entity].size * 2;
+                            if (this.tick - this.entities[entity].last_updated > 5 && this.entities[entity].color !== 7 && (
+                                dx_check ||
+                                dy_check ||
                                 this.entities[entity].health !== 1 || 
                                 this.entities[entity].flags == 0 || 
                                 this.entities[entity].flags_data.damage_indicator_first_degree || 
                                 this.entities[entity].flags_data.damage_indicator_second_degree ||
-                                (this.entities[entity].flags_data.auto_spin && this.entities[entity].layer == 10) ||
-                                (this.entities[entity].layer == 7 && this.entities[entity].flags_data.invuln)
+                                (this.entities[entity].flags_data.auto_spin && this.entities[entity].layer == 10)
                                 )) {
                                 delete this.entities[entity];
                             };
