@@ -12,6 +12,10 @@ class update_parser {
         this.deleted_entities = [];
         this.player.x = packet[1];
         this.player.y = packet[2];
+        if (this.player.entity_data) {
+            this.player.entity_data.x = this.player.x;
+            this.player.entity_data.y = this.player.y;
+        }
         this.player.fov = packet[3];
         if (packet.length > 5) {
             let flags = packet[4];
@@ -73,7 +77,11 @@ class update_parser {
             while (offset < packet.length - 1) {
                 let id = packet[offset++];
                 let result = this.parse_entity(packet, offset, id, offsets, encoded_packet);
-                if (id == this.player.id) this.player.entity_data = result[0];
+                if (id == this.player.id) {
+                    result[0].x = this.player.x;
+                    result[0].y = this.player.y;
+                    this.player.entity_data = result[0];
+                }
                 this.entities[id] = result[0];
                 offset = result[1];
             }
@@ -98,7 +106,7 @@ class update_parser {
             dx_check ||
             dy_check ||
             entity.health !== 1 ||
-            (entity.flags_data.autospin && entity.layer > 7) ||
+            ((entity.flags_data.auto_spin || entity.color == 5) && entity.layer > 7) ||
             entity.flags == 0 || 
             ((entity.flags_data.damage_indicator_first_degree || 
             entity.flags_data.damage_indicator_second_degree) && !entity.flags_data.idk_flag)
