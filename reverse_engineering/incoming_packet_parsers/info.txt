@@ -1,10 +1,11 @@
 This section includes code for the incoming packet parsers I wrote. Note that I did not write parsers for every packet--only the ones I found essential or interesting (in the case of the player tab, as it was a newer feature I wanted to reverse). 
-Update parser - 🔵 - This is almost completely functional. But, notably the method to completing certain entity deletions is a bit unorthodox, and certainly not the right way to do it. But it works.
+Update parser - 🟡 - This is almost completely functional. But, notably the method to completing certain entity deletions is a bit unorthodox, and certainly not the right way to do it. It's a bit outdated. **Any pull request correcting the change entity deletion function within this parser so it works completely is VERY welcome, as I do not have tthe time to work on this due to other projects**.
 Broadcast parser - ✅
 Mockup parser - 🔵 - The essential function of mapping mockup name to ID is complete. Do note there is some data on the actual mockup definitions and their structure, but it wasn't worth the work of reversing it to me. The important part is functional.
 Room parser - 🟢
 Player tab parser - ✅
 
 🔴 - "F"/death packet parser. Just provides the stats and data for the death screen. Never seemed important for my usage but I'm still giving it a red marker in case someone wants to do something with it.
+
 
 
