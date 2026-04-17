@@ -4,6 +4,8 @@ I never fully completed everything and this client is missing some stuff, but it
 
 I spent some time writing up a "reverse_engineering" folder, which contains a ton of explanations and data on the special code I've created for this game. My hope is that, by releasing this and providing info, skilled coders who want to work on Arras still can use this as a resource.
 
+Important note: I am not actively updating this anymore. But, PULL REQUESTS ARE WELCOME AND ENCOURAGED. There are some things missing, and some potential things that can be improved. Most notably, the current entity deletion detection in the "u" packet is based on a heuristic as the complete entity deletion system is unsolved. 
+
 Old readme stuff below.
 
 A custom arras.io client of mine with a ton of neat features--included fully decoded packets and parsing for them.
